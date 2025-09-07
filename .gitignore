@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.env
+.env
+
+# Virtual environments
+myvenv/
+venv/
+env/
+.venv/
+
+# VS Code settings
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs and debug
+*.log
+raw_response_*.bin
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Pillow image cache
+*.png
+
+# Gemini API credentials (if any)
+*.json

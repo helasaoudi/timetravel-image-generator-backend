@@ -34,7 +34,7 @@ app = FastAPI(title="Time Travel Image Transformer")
 # ----------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all for testing
+    allow_origins=["*"],  # Allow all origins for testing
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -114,14 +114,11 @@ async def transform_image(file: UploadFile = File(...), year: int = Form(...)):
 
         # Log raw response size
         logger.info(f"Raw Gemini API response size: {len(image_parts[0])} bytes")
-        with open(f"debug_response_{year}.bin", "wb") as f:
-            f.write(image_parts[0])
-            logger.info(f"Saved raw response to debug_response_{year}.bin")
 
-        # 8️⃣ Attempt to decode Base64 if needed
+        # 8️⃣ Handle Base64 or raw bytes
         transformed_data = image_parts[0]
         try:
-            # Test if it's Base64 (common if decoding fails)
+            # Attempt Base64 decoding
             transformed_data = base64.b64decode(transformed_data)
             logger.info(f"Decoded Base64 transformed image, size: {len(transformed_data)} bytes")
         except Exception:
